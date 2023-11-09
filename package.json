@@ -1,0 +1,27 @@
+{
+  "name": "web-project-api",
+  "version": "1.0.0",
+  "description": "Backend for sekolahdiannusantara web program",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karunialeo/web-project-sistem-basis-data-api.git"
+  },
+  "author": "Karunia Leo Gultom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karunialeo/web-project-sistem-basis-data-api/issues"
+  },
+  "homepage": "https://github.com/karunialeo/web-project-sistem-basis-data-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
