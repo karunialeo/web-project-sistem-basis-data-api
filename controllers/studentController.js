@@ -2,7 +2,7 @@ import db from "../config/db.js";
 
 // Controller function to get all posts
 const getAllStudents = (req, res) => {
-  const query = "SELECT * FROM student WHERE is_deleted = 0";
+  const query = "SELECT nis, name FROM student WHERE is_deleted = 0";
 
   db.query(query, (err, results) => {
     if (err) {
@@ -55,15 +55,33 @@ const createStudent = (req, res) => {
       .json({ error: "Both 'nis' and 'name' fields are required" });
   }
 
-  const query = "INSERT INTO student (nis, name) VALUES (?, ?)";
-
-  db.query(query, [nis, name], (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: "Failed to create a new student" });
-    } else {
-      res.json({ message: "New student created", studentNIS: nis });
+  // Check if nis already exists
+  const checkQuery = "SELECT COUNT(*) as count FROM student WHERE nis = ?";
+  db.query(checkQuery, [nis], (checkErr, checkResult) => {
+    if (checkErr) {
+      console.error(checkErr);
+      return res.status(500).json({ error: "Failed to check nis existence" });
     }
+
+    const nisCount = checkResult[0].count;
+
+    // If nis already exists, return an error
+    if (nisCount > 0) {
+      return res.status(400).json({ error: "NIS already exists" });
+    }
+
+    // If nis doesn't exist, proceed with the insertion
+    const insertQuery = "INSERT INTO student (nis, name) VALUES (?, ?)";
+    db.query(insertQuery, [nis, name], (insertErr, result) => {
+      if (insertErr) {
+        console.error(insertErr);
+        return res
+          .status(500)
+          .json({ error: "Failed to create a new student" });
+      } else {
+        res.json({ message: "New student created", studentNIS: nis });
+      }
+    });
   });
 };
 
