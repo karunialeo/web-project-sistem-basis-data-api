@@ -13,6 +13,15 @@ import {
   deleteTeacher,
   getTeacherByNIP,
 } from "../controllers/teacherController.js";
+import{
+  createUser,
+  getAllUsers,
+  getUserByUsername,
+  editUser,
+  deleteUser,
+  registerUser,
+  loginUser,
+}from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -38,5 +47,16 @@ router
   .put(editTeacher) // edit existing teacher
   .delete(deleteTeacher); // delete teacher
 router.get("/teacher/:nip", getTeacherByNIP); // get teacher information by giving NIP as params
+
+// ROUtes FOR USER
+router
+  .route("/user")
+  .get(getAllUsers) // get all user information
+  .post(createUser) // add new user
+  .put(editUser) // edit existing student
+  .delete(deleteUser) // delete user
+router.get("/user/:username", getUserByUsername);
+router.post("/user/register", registerUser);
+router.post("/user/login", loginUser);
 
 export default router;
