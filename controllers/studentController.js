@@ -2,7 +2,7 @@ import db from "../config/db.js";
 
 // Controller function to get all posts
 const getAllStudents = (req, res) => {
-  const query = "SELECT nis, name FROM student WHERE is_deleted = 0";
+  const query = "SELECT * FROM student WHERE is_deleted = 0";
 
   db.query(query, (err, results) => {
     if (err) {

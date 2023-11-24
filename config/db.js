@@ -1,8 +1,8 @@
 import mysql from "mysql";
 
-const MySQLHost = "10.100.73.228";
-const MySQLUser = "root";
-const MySQLPass = "";
+const MySQLHost = "178.16.137.63";
+const MySQLUser = "tiundira";
+const MySQLPass = "Undira2023";
 const MySQLDB = "sekolahdiannusantara";
 
 const db = mysql.createConnection({
